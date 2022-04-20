@@ -51,17 +51,10 @@ export default function Contact() {
             }, 5000)
 
           });
-
-      
-
-    
-  
-
-       
         
 
 
-        }
+    }
     
 
   return (
@@ -121,6 +114,7 @@ export default function Contact() {
           <label htmlFor="from_name" className="leading-7 text-sm text-gray-400">
             Name
           </label>
+          <input type="hidden" name="contact-form" value="test" />
           <input
             type="text"
             id="from_name"
