@@ -1,5 +1,5 @@
 import React from "react";
-import emailjs from '@emailjs/browser';
+
 
 
 
@@ -9,57 +9,56 @@ export default function Contact() {
     const [message, setMessage] = React.useState("");
     const [submitButtonLabel, setSubmitButtonLabel] = React.useState("Submit");
     
+
+    function encode(data) {
+      return Object.keys(data)
+        .map(
+          (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&");
+    }
+
+
+
       function handleSubmit(e) {
         e.preventDefault();
         
 
-        var templateParams = {
-          from_name,
-          reply_to,
-          message,
-      };
-       
-      emailjs.send('service_04bn6rw', 'template_uydog4j', templateParams, 'XslMYGYr_ZuVl6Llh')
-          .then(function(response) {
-
-             console.log('SUCCESS!', response.status, response.text);
-
-             setName("");
-             setEmail("");
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact-form", from_name, reply_to, message})
+        })
+        
+          .then(() => {
+            setName("");
+            setEmail("");
              setMessage("");
 
              setSubmitButtonLabel("Message Sent!");
 
-             setTimeout(() => {
-              setSubmitButtonLabel("Submit");
-             }, 5000)
+            setTimeout(() => {
+            setSubmitButtonLabel("Submit");
+            }, 5000)
 
-          }, function(error) {
-             console.log('FAILED...', error);
+          })
+          .catch((error) => {
+            console.log(error.message);
+            setSubmitButtonLabel("Error sending Message!");
+
+            setTimeout(() => {
+            setSubmitButtonLabel("Submit");
+            }, 5000)
+
           });
+
       
+
+    
+  
+
+       
         
-
-        /*
-
-
-            function encode(data) {
-        return Object.keys(data)
-          .map(
-            (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-          )
-          .join("&");
-      }
-
-
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact", name, email, message }),
-        })
-          .then(() => alert("Message sent!"))
-          .catch((error) => alert(error));
-        */
 
 
         }
