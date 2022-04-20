@@ -12,7 +12,7 @@ export default function About(){
                         <br className="hidden lg:inline-block"/>I like building apps.
                     </h1> 
                     <p className="mb-8 leading-relaxed">
-                        I am a self-taught web developer. I am really interested in positions that would require us working in a team!
+                        I am a self-taught web developer and this is my Portfolio website. Welcome! See my works below and feel free to send me a message if you're interested in getting in touch.
                     </p>
                     <div className="flex justify-center">
                         <a
